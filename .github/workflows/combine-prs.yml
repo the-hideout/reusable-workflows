@@ -7,6 +7,8 @@ on:
         required: true
       COMBINE_PRS_PRIVATE_KEY:
         required: true
+      fallback:
+        required: true
 
 jobs:
   combine-prs:
