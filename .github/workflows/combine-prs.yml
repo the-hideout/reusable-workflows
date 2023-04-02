@@ -3,9 +3,11 @@ name: Combine PRs
 on:
   workflow_call:
     secrets:
-      APP_ID:
+      COMBINE_PRS_APP_ID:
         required: true
-      PRIVATE_KEY:
+      COMBINE_PRS_PRIVATE_KEY:
+        required: true
+      fallback:
         required: true
 
 jobs:
@@ -17,8 +19,9 @@ jobs:
         uses: wow-actions/use-app-token@d7957e08172ca2e8e49b35b8d266ad585885edc7 # pin@v2.0.2
         id: generate_token
         with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.PRIVATE_KEY }}
+          app_id: ${{ secrets.COMBINE_PRS_APP_ID }}
+          private_key: ${{ secrets.COMBINE_PRS_PRIVATE_KEY }}
+          fallback: ${{ secrets.GITHUB_TOKEN }} # fall back to the default token if the app token is not available
 
       - name: combine-prs
         uses: github/combine-prs@v3.0.1
